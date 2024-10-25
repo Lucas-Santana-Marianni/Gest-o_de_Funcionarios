@@ -1,0 +1,55 @@
+Desenvolva um sistema de Gestão de Funcionários que possibilite o gerenciamento de departamentos, funcionários e seus respectivos salários. O sistema deve ser capaz de:
+
+Criar um banco de dados para armazenar informações relacionadas a departamentos e funcionários.
+Registrar os dados dos funcionários, incluindo nome, cargo, salário e departamento ao qual pertencem.
+Controlar os pagamentos mensais realizados aos funcionários, armazenando a data e o valor de cada pagamento.
+Realizar consultas que permitam visualizar informações dos funcionários, totalizar salários por departamento e acompanhar o histórico de pagamentos.
+
+# Sistema de Gestão de Funcionários
+
+Este projeto implementa um sistema de **Gestão de Funcionários** utilizando SQL. O objetivo é gerenciar informações sobre departamentos, funcionários e pagamentos.
+
+## Estrutura do Projeto
+
+O projeto contém os seguintes arquivos:
+
+- `database.sql`: Script SQL que cria o banco de dados, as tabelas e insere dados iniciais.
+- `README.md`: Documento explicativo sobre o projeto e instruções de uso.
+- `.gitignore`: Arquivo para ignorar arquivos desnecessários no repositório Git.
+
+## Funcionalidades
+
+- **Cadastro de Departamentos**: Permite a criação de registros de departamentos.
+- **Cadastro de Funcionários**: Registra informações sobre funcionários, incluindo nome, cargo, salário e departamento.
+- **Registro de Salários**: Insere pagamentos realizados a cada funcionário, incluindo a data e o valor do pagamento.
+- **Consultas SQL**:
+  - Listar funcionários com seus respectivos departamentos.
+  - Calcular a soma dos salários por departamento.
+  - Visualizar o histórico de pagamentos de funcionários.
+
+## Estrutura do Banco de Dados
+
+O sistema possui três tabelas principais:
+
+1. **Departamentos**:
+   - `ID_departamento` (INT): Identificador único do departamento.
+   - `nome` (VARCHAR): Nome do departamento.
+
+2. **Funcionarios**:
+   - `ID_funcionario` (INT): Identificador único do funcionário.
+   - `nome` (VARCHAR): Nome do funcionário.
+   - `cargo` (VARCHAR): Cargo do funcionário.
+   - `salario` (DECIMAL): Salário do funcionário.
+   - `ID_departamento` (INT): Chave estrangeira que referencia o departamento ao qual o funcionário pertence.
+
+3. **Salarios**:
+   - `ID_salario` (INT): Identificador único do registro de salário.
+   - `ID_funcionario` (INT): Chave estrangeira que referencia o funcionário.
+   - `data_pag` (DATE): Data em que o pagamento foi realizado.
+   - `valor` (DECIMAL): Valor do pagamento realizado.
+
+## Como Executar
+
+1. Clone o repositório:
+   ```bash
+   git clone https://github.com/seu-usuario/gestao-funcionarios.git
