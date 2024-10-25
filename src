@@ -1,0 +1,62 @@
+-- Criação do banco de dados e seleção do mesmo
+CREATE DATABASE GestaoFuncionarios;
+USE GestaoFuncionarios;
+
+-- Criação da tabela Departamentos
+CREATE TABLE Departamentos (
+    ID_departamento INT AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(50) NOT NULL
+);
+
+-- Criação da tabela Funcionarios com chave estrangeira para Departamentos
+CREATE TABLE Funcionarios (
+    ID_funcionario INT AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(100) NOT NULL,
+    cargo VARCHAR(50) NOT NULL,
+    salario DECIMAL(10, 2) NOT NULL,
+    ID_departamento INT,
+    FOREIGN KEY (ID_departamento) REFERENCES Departamentos(ID_departamento)
+);
+
+-- Criação da tabela Salarios com chave estrangeira para Funcionarios
+CREATE TABLE Salarios (
+    ID_salario INT AUTO_INCREMENT PRIMARY KEY,
+    ID_funcionario INT,
+    data_pag DATE NOT NULL,
+    valor DECIMAL(10, 2),
+    FOREIGN KEY (ID_funcionario) REFERENCES Funcionarios(ID_funcionario)
+);
+
+-- Inserção de dados na tabela Departamentos
+INSERT INTO Departamentos(nome)
+VALUES ('TI'),
+       ('Recursos Humanos'),  -- Corrigido "Recusrsos" para "Recursos"
+       ('Financeiro');
+
+-- Inserção de dados na tabela Funcionarios
+INSERT INTO Funcionarios (nome, cargo, salario, ID_departamento)
+VALUES ('Rogério Nunes', 'Gerenciador de sistemas', 10000, 1),
+       ('Maria Weber', 'Assistente', 3000, 2),
+       ('Pedro Dias', 'Analista financeiro', 4000, 3);
+
+-- Inserção de dados na tabela Salarios
+INSERT INTO Salarios (ID_funcionario, data_pag, valor)
+VALUES (1, '2024-11-02', 10000),
+       (2, '2024-11-01', 3500),
+       (3, '2024-11-01', 6000);
+
+-- Selecionar dados de Funcionarios com Departamentos
+SELECT f.nome AS nome, f.cargo AS cargo, f.salario AS salario, f.ID_departamento AS ID_departamento
+FROM Funcionarios f
+JOIN Departamentos d ON f.ID_departamento = d.ID_departamento;
+
+-- Soma dos salários por departamento
+SELECT d.ID_departamento AS ID_departamento, SUM(f.salario) AS valor
+FROM Funcionarios f
+JOIN Departamentos d ON f.ID_departamento = d.ID_departamento
+GROUP BY d.nome;
+
+-- Seleção de informações na tabela Salarios por ID_funcionario
+SELECT ID_funcionario, data_pag, valor
+FROM Salarios
+WHERE ID_funcionario IN (1, 2, 3);
